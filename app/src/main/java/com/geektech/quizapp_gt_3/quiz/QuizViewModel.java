@@ -1,6 +1,14 @@
 package com.geektech.quizapp_gt_3.quiz;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
 
-public class QuizViewModel extends AppCompatActivity {
+
+
+public class QuizViewModel extends ViewModel {
+
+    public void init(int amount, Integer category, String difficulty) {
+
+    }
+
+
 }

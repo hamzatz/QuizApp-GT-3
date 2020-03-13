@@ -2,10 +2,11 @@
 package com.geektech.quizapp_gt_3.model;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result {
+public class Question {
 
     @SerializedName("category")
     @Expose
@@ -25,6 +26,26 @@ public class Result {
     @SerializedName("incorrect_answers")
     @Expose
     private List<String> incorrectAnswers = null;
+
+    private List<String> answers;
+
+    private Integer selectedAnswer;
+
+    public Integer getSelectedAnswer() {
+        return selectedAnswer;
+    }
+
+    public void setSelectedAnswer(Integer selectedAnswer) {
+        this.selectedAnswer = selectedAnswer;
+    }
+
+    public List<String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<String> answers) {
+        this.answers = answers;
+    }
 
     public String getCategory() {
         return category;

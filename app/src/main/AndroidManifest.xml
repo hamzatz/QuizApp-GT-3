@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".rezult.RezultActivity"></activity>
+        <activity android:name=".rezult.RezultActivity"/>
         <activity android:name=".quiz.QuizActivity" />
         <activity android:name=".main.MainActivity">
         <intent-filter>

@@ -4,8 +4,6 @@ import com.geektech.quizapp_gt_3.core.CoreCallback;
 import com.geektech.quizapp_gt_3.model.QuestionsResponse;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
@@ -24,7 +22,7 @@ public class QuizApiClient implements IQuizApiClient {
     @Override
     public void getQuestions(final QuestionsCallback callback) {
 
-        Call<QuestionsResponse> call = client.getQuestions(10,"type");
+        Call<QuestionsResponse> call = client.getQuestions(10,null,"easy");
 
         call.enqueue(new CoreCallback<QuestionsResponse>() {
             @Override
@@ -46,7 +44,8 @@ public class QuizApiClient implements IQuizApiClient {
         @GET("/api.php")
         Call<QuestionsResponse> getQuestions(
                 @Query("amount") int amount,
-                @Query("category") String category
+                @Query("category") String category,
+                @Query("difficulty") String difficulty
         );
     }
 }

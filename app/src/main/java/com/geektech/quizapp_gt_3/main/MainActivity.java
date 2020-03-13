@@ -1,90 +1,77 @@
 package com.geektech.quizapp_gt_3.main;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
-
-import android.content.Context;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.View;
-
-import com.geektech.quizapp_gt_3.model.QuestionsResponse;
+import android.view.MenuItem;
 import com.geektech.quizapp_gt_3.R;
 import com.geektech.quizapp_gt_3.data.remote.IQuizApiClient;
 import com.geektech.quizapp_gt_3.data.remote.QuizApiClient;
-import com.geektech.quizapp_gt_3.model.Result;
-
+import com.geektech.quizapp_gt_3.model.Question;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
 
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
 
     private ViewPager mViewPager;
-    private MainViewModel mainViewModel;
+    private BottomNavigationView mBottomNav;
+    MainViewPagerAdapter mAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        MainFragment fragment;
-        fragment = new MainFragment();
-        ft.replace(R.id.container_main, fragment);
-        ft.commit();
+        mAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
+        mViewPager = findViewById(R.id.main_view_pager);
+        mViewPager.setAdapter(mAdapter);
+
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                mBottomNav.getMenu().getItem(position).setChecked(true);
+            }
+        });
+
+        mBottomNav = findViewById(R.id.bottom_nav);
+        mBottomNav.setOnNavigationItemSelectedListener(this);
         setTheme(R.style.AppTheme);
+
+        new QuizApiClient().getQuestions(new IQuizApiClient.QuestionsCallback() {
+            @Override
+            public void onSuccess(List<Question> question) {
+
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int page = 0;
+
+        switch (menuItem.getItemId()) {
+            case R.id.nav_history:
+                page = 1;
+                break;
+            case R.id.nav_settings:
+                page = 2;
+                break;
+        }
+
+        mViewPager.setCurrentItem(page);
+        return true;
     }
 
 
-//        FragmentManager fm = getSupportFragmentManager();
-//        fragment = fm.findFragmentByTag("myFragmentTag");
-//        if (fragment == null) {
-//            FragmentTransaction ft = fm.beginTransaction();
-//            fragment =new MyFragment();
-//            ft.add(android.R.id.content,fragment,"myFragmentTag");
-//            ft.commit();
-//        }
-
-
-//        mainViewModel = ViewModelProviders
-//                .of(this)
-//                .get(MainViewModel.class);
-//
-//        new QuizApiClient().getQuestions(new IQuizApiClient.QuestionsCallback() {
-//
-//            @Override
-//            public void onSuccess(List<Result> question) {
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Exception e) {
-//
-//            }
-//        });
-//
-//    }
-//
-//
-//    public void initViews() {
-
-    // mViewPager = findViewById(R.id.view_pager);
-//        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//
-//
-//            }
-//
-//        });
-//    }
 }
+
+

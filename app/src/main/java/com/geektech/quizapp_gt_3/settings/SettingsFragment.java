@@ -1,32 +1,35 @@
 package com.geektech.quizapp_gt_3.settings;
 
 
-import android.os.Bundle;
+
+
+import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.geektech.quizapp_gt_3.R;
+import com.geektech.quizapp_gt_3.core.CoreFragment;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends CoreFragment {
 
 
-    public SettingsFragment() {
-        // Required empty public constructor
+    public static  SettingsFragment newInstance(){
+
+        return new SettingsFragment();
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+    protected int getLayoutId() {
+        return R.layout.fragment_settings;
     }
 
+    @Override
+    protected void initView(View view) {
+
+    }
 }

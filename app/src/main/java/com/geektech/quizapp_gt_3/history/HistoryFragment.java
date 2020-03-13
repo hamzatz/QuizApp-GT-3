@@ -10,23 +10,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.geektech.quizapp_gt_3.R;
+import com.geektech.quizapp_gt_3.core.CoreFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends CoreFragment {
 
 
-    public HistoryFragment() {
-        // Required empty public constructor
+    public static HistoryFragment newInstance(){
+
+     return  new HistoryFragment();
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false);
+    protected int getLayoutId() {
+        return R.layout.fragment_history;
     }
 
+    @Override
+    protected void initView(View view) {
+
+    }
 }

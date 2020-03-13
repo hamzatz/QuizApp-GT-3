@@ -10,9 +10,10 @@ public class QuestionsResponse {
     @SerializedName("response_code")
     @Expose
     private Integer responseCode;
+
     @SerializedName("results")
     @Expose
-     List<Result> results = null;
+     List<Question> results = null;
 
     public Integer getResponseCode() {
         return responseCode;
@@ -22,11 +23,11 @@ public class QuestionsResponse {
         this.responseCode = responseCode;
     }
 
-    public List<Result> getResults() {
+    public List<Question> getResults() {
         return results;
     }
 
-    public void setResults(List<Result> results) {
+    public void setResults(List<Question> results) {
         this.results = results;
     }
 
